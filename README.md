@@ -6,7 +6,9 @@
 [circleci-url]: https://circleci.com/gh/nestjs/nest
 
   <h1 align="center"> 
-    NestJS Tutorial Repository 
+    Practice with NestJS 
+    <br>
+     <small> Todo List </small>
   </h1>
     
   <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
