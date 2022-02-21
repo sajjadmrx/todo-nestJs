@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common'
+import { Body, Controller, Get, Param, Post } from '@nestjs/common'
 import { ITodo } from './todo.interfaces'
 import { TodoService } from './todo.service'
 
@@ -13,6 +13,11 @@ export class TodoController {
   @Get()
   async todos() {
     return await this.TodoService.getTodos()
+  }
+
+  @Get(':id')
+  async getSingleTodo(@Param('id') id: string) {
+    return await this.TodoService.getTodoById(id)
   }
 
   @Post()
