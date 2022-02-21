@@ -12,13 +12,22 @@ import { ITodo } from './todo.interfaces';
 
 @Schema({ timestamps: true })
 export class Todo extends mongoose.Document implements ITodo {
+  // id is number
+
+  @Prop({
+    default: Math.random().toString().substring(2)
+  })
+  todo_id: string;
+
   @Prop()
   title: string;
 
   @Prop()
   description: string;
 
-  @Prop()
+  @Prop({
+    default: false
+  })
   completed: boolean;
 
   @Prop()

@@ -1,4 +1,5 @@
-import { Controller, Get } from '@nestjs/common'
+import { Body, Controller, Get, Post } from '@nestjs/common'
+import { ITodo } from './todo.interfaces'
 import { TodoService } from './todo.service'
 
 
@@ -10,9 +11,15 @@ export class TodoController {
   ) { }
 
   @Get()
-  todos() {
-    return []
+  async todos() {
+    return await this.TodoService.getTodos()
   }
 
+  @Post()
+  async createTodo(
+    @Body() todo: ITodo
+  ) {
+    return await this.TodoService.createTodo(todo)
+  }
 
 }
