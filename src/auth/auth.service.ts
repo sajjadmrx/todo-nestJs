@@ -4,6 +4,9 @@ import {
 import { UserRepository } from "src/user/user.repository";
 import { UserService } from "src/user/user.service";
 
+
+import * as bcrypt from "bcryptjs";
+
 @Injectable()
 export class AuthService {
   constructor(
@@ -15,8 +18,10 @@ export class AuthService {
     if (user)
       throw new UnauthorizedException('Username already exists');
 
+    let passHashid = await bcrypt.hash(password, 10);
+    user = await this.userRepository.create({ username, password: passHashid });
 
-    user = await this.userRepository.create({ username, password });
+    //return Token
     return user;
   }
 
@@ -27,10 +32,12 @@ export class AuthService {
       throw new UnauthorizedException('Invalid credentials');
 
     // check Hashed password
-
-    if (user.password !== password)
+    const validPass = await bcrypt.compare(password, user.password);
+    if (!validPass)
       throw new UnauthorizedException('Invalid credentials');
 
+
+    // return Token
     return user;
   }
 
