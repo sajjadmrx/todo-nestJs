@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Todo } from './todo.model';
+import { Todo } from './todo.schema';
 import { Model, FilterQuery } from 'mongoose';
 import { ITodo } from './todo.interfaces';
 

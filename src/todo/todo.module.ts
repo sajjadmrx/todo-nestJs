@@ -4,7 +4,7 @@ import { TodoService } from './todo.service';
 import {
   MongooseModule
 } from '@nestjs/mongoose'
-import { todoSchema } from './todo.model';
+import { todoSchema } from './todo.schema';
 import { TodoRepository } from './todo.repository';
 
 @Module({

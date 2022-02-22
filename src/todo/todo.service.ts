@@ -2,7 +2,7 @@ import { HttpCode, HttpStatus, Injectable, InternalServerErrorException, NotFoun
 
 
 import { ITodo } from './todo.interfaces';
-import { Todo } from './todo.model';
+import { Todo } from './todo.schema';
 import { TodoRepository } from './todo.repository';
 
 

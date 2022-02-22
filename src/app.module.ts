@@ -5,11 +5,13 @@ import {
 import { MongooseModule } from '@nestjs/mongoose'
 
 import { TodoModule } from './todo/todo.module';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
+    MongooseModule.forRoot('mongodb://localhost/todo-nestjs', {}),
     TodoModule,
-    MongooseModule.forRoot('mongodb://localhost/todo-nestjs', {})
+    UserModule
   ],
 })
 export class AppModule { }
