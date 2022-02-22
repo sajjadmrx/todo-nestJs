@@ -14,5 +14,13 @@ export class TokenService {
     return accessToken;
   }
 
+  async verifyToken(token: string): Promise<any> {
+    try {
+      const data = await this.jwtService.verifyAsync(token);
+      return data;
+    } catch (error) {
+      return null;
+    }
+  }
 
 }
