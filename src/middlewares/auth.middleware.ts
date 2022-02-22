@@ -15,7 +15,8 @@ export class CheckTokenMiddleware implements NestMiddleware {
     if (token) {
       try {
         const data = await this.tokenService.verifyToken(token)
-
+        if (data == null)
+          throw new Error('')// run catch
 
         next();
 
