@@ -1,10 +1,9 @@
-import { Module } from '@nestjs/common'
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common'
 import { MongooseModule } from '@nestjs/mongoose';
 import { UserController } from './user.controller';
 import { UserRepository } from './user.repository';
 import { userSchema } from './user.schema';
 import { UserService } from './user.service';
-
 
 
 @Module({
@@ -22,4 +21,6 @@ import { UserService } from './user.service';
     UserRepository
   ],
 })
-export class UserModule { }
+export class UserModule {
+
+}
