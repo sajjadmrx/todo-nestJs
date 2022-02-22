@@ -6,11 +6,13 @@ import { UserService } from "src/user/user.service";
 
 
 import * as bcrypt from "bcryptjs";
+import { TokenService } from "./token.service";
 
 @Injectable()
 export class AuthService {
   constructor(
-    private userRepository: UserRepository
+    private userRepository: UserRepository,
+    private tokenService: TokenService
   ) { }
 
   async register(username: string, password: string): Promise<any> {
@@ -21,8 +23,17 @@ export class AuthService {
     let passHashid = await bcrypt.hash(password, 10);
     user = await this.userRepository.create({ username, password: passHashid });
 
-    //return Token
-    return user;
+
+
+
+    const token = await this.tokenService.createToken({ userId: user.user_id }, {
+      expiresIn: '1h',
+    })
+
+    return {
+      token
+    }
+
   }
 
 
@@ -37,8 +48,13 @@ export class AuthService {
       throw new UnauthorizedException('Invalid credentials');
 
 
-    // return Token
-    return user;
+    const token = await this.tokenService.createToken({ userId: user.user_id }, {
+      expiresIn: '1h',
+    })
+
+    return {
+      token
+    }
   }
 
 
