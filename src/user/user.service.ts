@@ -1,4 +1,5 @@
 import { Injectable } from "@nestjs/common";
+import { IUser } from "./user.interface";
 import { UserRepository } from "./user.repository";
 
 
@@ -8,12 +9,20 @@ export class UserService {
 
   constructor(private readonly userRepository: UserRepository) { }
 
-  async findAll(): Promise<any> {
+  async findAll(): Promise<IUser[]> {
     return await this.userRepository.find();
   }
 
-  async findOne(username: string): Promise<any> {
-    return await this.userRepository.findOne({ username });
+  async findOneWithUserId(userId: string): Promise<IUser> {
+    return this.userRepository.findOne({ userId });
+  }
+
+  async findOneWithUsername(username: string): Promise<IUser> {
+    return this.userRepository.findOne({ username });
+  }
+
+  async create(user: any): Promise<IUser> {
+    return this.userRepository.create(user);
   }
 
 }

@@ -20,6 +20,10 @@ import { UserService } from './user.service';
     UserService,
     UserRepository
   ],
+  exports: [
+    UserService,
+    UserRepository,
+  ]
 })
 export class UserModule {
 
