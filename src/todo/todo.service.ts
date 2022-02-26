@@ -32,8 +32,10 @@ export class TodoService {
 
   }
 
-  async getTodos(): Promise<Todo[]> {
-    return this.todoRepository.find()
+  async getTodos(userId: string): Promise<Todo[]> {
+    return this.todoRepository.find({
+
+    })
   }
 
   async createTodo(todo: ITodo): Promise<Todo> {

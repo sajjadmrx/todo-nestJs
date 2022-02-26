@@ -19,6 +19,9 @@ export class Todo extends mongoose.Document implements ITodo {
   })
   todo_id: string;
 
+  @Prop({})
+  user_id: string;
+
   @Prop()
   title: string;
 

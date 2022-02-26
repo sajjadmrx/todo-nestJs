@@ -4,6 +4,8 @@ import { TodoService } from './todo.service'
 import { createParamDecorator } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { Request } from 'express';
+import { getUser } from 'src/user/decorators/getUser.decorator';
+import { IUser } from 'src/user/user.interface';
 export const Userw = createParamDecorator((data, req) => req.user);
 @Controller('todo')
 export class TodoController {
@@ -11,11 +13,12 @@ export class TodoController {
   constructor(
     private readonly TodoService: TodoService
   ) { }
+
   @UseGuards(AuthGuard('jwt'))
   @Get()
-  async todos(@Req() req: Request) {
-
-    return req.user
+  async todos(@getUser() user: IUser) {
+    return user.username
+    //  return await this.TodoService.getTodos(req.user)
   }
 
   @Get(':id')
