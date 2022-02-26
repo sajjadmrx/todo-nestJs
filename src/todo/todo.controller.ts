@@ -1,8 +1,8 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common'
+import { Body, Controller, Delete, Get, Param, Post, Put, Req } from '@nestjs/common'
 import { ITodo } from './todo.interfaces'
 import { TodoService } from './todo.service'
-
-
+import { createParamDecorator } from '@nestjs/common';
+export const Userw = createParamDecorator((data, req) => req.user);
 @Controller('todo')
 export class TodoController {
 
@@ -12,6 +12,7 @@ export class TodoController {
 
   @Get()
   async todos() {
+
     return await this.TodoService.getTodos()
   }
 
