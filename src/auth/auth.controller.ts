@@ -8,7 +8,7 @@ export class AuthController {
 
   }
 
-  @Post('login')
+  @Post('signin')
   signinLocal(@Body() dto: AuthDto) {
     return this.authService.signinLocal(dto);
   }

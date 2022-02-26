@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Todo } from './todo.schema';
 import { Model, FilterQuery } from 'mongoose';
@@ -34,6 +34,9 @@ export class TodoRepository {
     let oldTodo = await this.todoModel.findOneAndUpdate({ todo_id: id }, {
       ...todo,
     })
+    if (!oldTodo) {
+      throw new NotFoundException(`Todo with id ${id} not found`)
+    }
     oldTodo.set(todo);
     return oldTodo;
 
