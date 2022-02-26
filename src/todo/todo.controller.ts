@@ -7,6 +7,7 @@ import { Request } from 'express';
 import { getUser } from 'src/user/decorators/getUser.decorator';
 import { IUser } from 'src/user/user.interface';
 export const Userw = createParamDecorator((data, req) => req.user);
+@UseGuards(AuthGuard('jwt'))
 @Controller('todo')
 export class TodoController {
 
@@ -14,11 +15,10 @@ export class TodoController {
     private readonly TodoService: TodoService
   ) { }
 
-  @UseGuards(AuthGuard('jwt'))
+
   @Get()
-  async todos(@getUser() user: IUser) {
-    return user.username
-    //  return await this.TodoService.getTodos(req.user)
+  async todos(@getUser('user_id') user_id: string) {
+    return await this.TodoService.getTodos(user_id)
   }
 
   @Get(':id')
@@ -28,9 +28,10 @@ export class TodoController {
 
   @Post()
   async createTodo(
-    @Body() todo: ITodo
+    @Body() todo: ITodo,
+    @getUser('user_id') user_id: string
   ) {
-    return await this.TodoService.createTodo(todo)
+    return await this.TodoService.createTodo(todo, user_id)
   }
 
   @Delete(':id')

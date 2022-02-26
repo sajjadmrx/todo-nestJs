@@ -19,8 +19,10 @@ export class TodoRepository {
     return this.todoModel.find(TodoFilterQuery);
   }
 
-  async create(todo: ITodo): Promise<Todo> {
-    return this.todoModel.create(todo);
+  async create(todo: ITodo, user_id): Promise<Todo> {
+    return this.todoModel.create({
+      ...todo, user_id
+    });
   }
 
   async deleteOne(TodoFilterQuery: FilterQuery<Todo>): Promise<boolean> {

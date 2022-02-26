@@ -34,12 +34,12 @@ export class TodoService {
 
   async getTodos(userId: string): Promise<Todo[]> {
     return this.todoRepository.find({
-
+      user_id: userId
     })
   }
 
-  async createTodo(todo: ITodo): Promise<Todo> {
-    return this.todoRepository.create(todo)
+  async createTodo(todo: ITodo, user_id: string): Promise<Todo> {
+    return this.todoRepository.create(todo, user_id)
   }
 
   async deleteTodo(id: string): Promise<{}> {
