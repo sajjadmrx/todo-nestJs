@@ -26,6 +26,8 @@ export class TodoController {
     return await this.TodoService.getTodoById(id)
   }
 
+  // @getUser decorator is property decorator which is non-sense here. Please read about Method Decorators and use general Auth Decorators that is mentioned in NEST.JS Website.
+  // use guards in order to have authorization in addition to authentication.
   @Post()
   async createTodo(
     @Body() todo: ITodo,
